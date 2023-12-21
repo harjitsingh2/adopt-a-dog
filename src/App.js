@@ -1,7 +1,9 @@
 import React from 'react';
 import './App.css';
-import Login from './components/login';
-import Search from './components/search';
+// @ts-ignore
+import Login from './components/Login';
+// @ts-ignore
+import Search from './components/Search';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 
