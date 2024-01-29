@@ -71,6 +71,7 @@ export default function Search() {
     // run the useEffect once when the component mounts
     useEffect(() => {
         fetchDogs();
+        // getBreeds();
     }, []);
 
     const handleBreedFilterChange = (event) => {
@@ -82,6 +83,153 @@ export default function Search() {
         setFilteredDogs(filtered);
     };
 
+    // get all possible breeds
+    const getBreeds = async () => {
+        console.log('Attempting to get breeds');
+        try {
+            const response = await fetch('https://frontend-take-home-service.fetch.com/dogs/breeds', {
+                method: 'GET',
+                headers: {'Content-Type': 'application/json'},
+                credentials: 'include'
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                console.log('Retrieved breeds successfully:');
+                console.log(data);
+                
+            } else {
+                console.log('Could not retrieve breeds');
+            }
+        } catch (error) {
+            console.error('Error getting breeds:', error);
+        }
+    };
+
+    const breeds = [
+        "Affenpinscher",
+        "Afghan Hound",
+        "African Hunting Dog",
+        "Airedale",
+        "American Staffordshire Terrier",
+        "Appenzeller",
+        "Australian Terrier",
+        "Basenji",
+        "Basset",
+        "Beagle",
+        "Bedlington Terrier",
+        "Bernese Mountain Dog",
+        "Black-and-tan Coonhound",
+        "Blenheim Spaniel",
+        "Bloodhound",
+        "Bluetick",
+        "Border Collie",
+        "Border Terrier",
+        "Borzoi",
+        "Boston Bull",
+        "Bouvier Des Flandres",
+        "Boxer",
+        "Brabancon Griffon",
+        "Briard",
+        "Brittany Spaniel",
+        "Bull Mastiff",
+        "Cairn",
+        "Cardigan",
+        "Chesapeake Bay Retriever",
+        "Chihuahua",
+        "Chow",
+        "Clumber",
+        "Cocker Spaniel",
+        "Collie",
+        "Curly-coated Retriever",
+        "Dandie Dinmont",
+        "Dhole",
+        "Dingo",
+        "Doberman",
+        "English Foxhound",
+        "English Setter",
+        "English Springer",
+        "EntleBucher",
+        "Eskimo Dog",
+        "Flat-coated Retriever",
+        "French Bulldog",
+        "German Shepherd",
+        "German Short-haired Pointer",
+        "Giant Schnauzer",
+        "Golden Retriever",
+        "Gordon Setter",
+        "Great Dane",
+        "Great Pyrenees",
+        "Greater Swiss Mountain Dog",
+        "Groenendael",
+        "Ibizan Hound",
+        "Irish Setter",
+        "Irish Terrier",
+        "Irish Water Spaniel",
+        "Irish Wolfhound",
+        "Italian Greyhound",
+        "Japanese Spaniel",
+        "Keeshond",
+        "Kelpie",
+        "Kerry Blue Terrier",
+        "Komondor",
+        "Kuvasz",
+        "Labrador Retriever",
+        "Lakeland Terrier",
+        "Leonberg",
+        "Lhasa",
+        "Malamute",
+        "Malinois",
+        "Maltese Dog",
+        "Mexican Hairless",
+        "Miniature Pinscher",
+        "Miniature Poodle",
+        "Miniature Schnauzer",
+        "Newfoundland",
+        "Norfolk Terrier",
+        "Norwegian Elkhound",
+        "Norwich Terrier",
+        "Old English Sheepdog",
+        "Otterhound",
+        "Papillon",
+        "Pekinese",
+        "Pembroke",
+        "Pomeranian",
+        "Pug",
+        "Redbone",
+        "Rhodesian Ridgeback",
+        "Rottweiler",
+        "Saint Bernard",
+        "Saluki",
+        "Samoyed",
+        "Schipperke",
+        "Scotch Terrier",
+        "Scottish Deerhound",
+        "Sealyham Terrier",
+        "Shetland Sheepdog",
+        "Shih-Tzu",
+        "Siberian Husky",
+        "Silky Terrier",
+        "Soft-coated Wheaten Terrier",
+        "Staffordshire Bullterrier",
+        "Standard Poodle",
+        "Standard Schnauzer",
+        "Sussex Spaniel",
+        "Tibetan Mastiff",
+        "Tibetan Terrier",
+        "Toy Poodle",
+        "Toy Terrier",
+        "Vizsla",
+        "Walker Hound",
+        "Weimaraner",
+        "Welsh Springer Spaniel",
+        "West Highland White Terrier",
+        "Whippet",
+        "Wire-haired Fox Terrier",
+        "Yorkshire Terrier"
+    ]
+
+
     return (
         <>
             <h1>Search for your next dog!</h1>
@@ -90,9 +238,9 @@ export default function Search() {
                 <label htmlFor="breedFilter">Filter by Breed:</label>
                 <select id="breedFilter" value={breedFilter} onChange={handleBreedFilterChange}>
                     <option value="">All Breeds</option>
-                    <option value="Chihuahua">Chihuahua</option>
-                    <option value="Silky Terrier">Silky Terrier</option>
-                    <option value="Soft-coated Wheaten Terrier">Soft-coated Wheaten Terrier</option>
+                    {breeds.map((breed) => (
+                        <option value={breed}>{breed}</option>
+                    ) )}
                 </select>
             </div>
 
