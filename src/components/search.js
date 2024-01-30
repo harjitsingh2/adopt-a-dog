@@ -232,7 +232,7 @@ export default function Search() {
 
     return (
         <>
-            <h1>Search for your next dog!</h1>
+            <h1 className="text-blue-500">Search for your next dog!</h1>
 
             <div>
                 <label htmlFor="breedFilter">Filter by Breed:</label>
@@ -244,7 +244,7 @@ export default function Search() {
                 </select>
             </div>
 
-            <div className="dogs">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {filteredDogs.map((dog, index) => (
                      <Dog key={index} dog={dog}/>
                     //  <TDog key={index} dog={dog}/>
