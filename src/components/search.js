@@ -11,6 +11,11 @@ export default function Search() {
     // track state changes from user input of breed
     const [breedFilter, setBreedFilter] = useState();
 
+    // manage cursor for pagination
+    const [nextUrl, setNextUrl] = useState('');
+    const [prevUrl, setPrevUrl] = useState('');
+
+
     // fetch details of each dog
     const fetchADog = async (dogIds) => {
         // check if dogIds is an array of the dog's ids
@@ -38,13 +43,15 @@ export default function Search() {
     };
 
     // fetch dog ids
-    const fetchDogs = async () => {
-        console.log('Attempting to retrieve dogs');
+    const fetchDogs = async (url) => {
+        // console.log('Attempting to retrieve dogs');
+
+        const apiUrl = url || `https://frontend-take-home-service.fetch.com/dogs/search?size=10`;
+
         try {
-            const response = await fetch('https://frontend-take-home-service.fetch.com/dogs/search?size=100', {
+            const response = await fetch(apiUrl, {
                 method: 'GET',
                 headers: {'Content-Type': 'application/json'},
-                // body: {size: 100},
                 credentials: 'include'
             });
 
@@ -60,6 +67,11 @@ export default function Search() {
                 setDogs(dogDetails); 
                 // Initially all dogs are displayed
                 setFilteredDogs(dogDetails);
+
+                // Update next url
+                setNextUrl(data.next ? 'https://frontend-take-home-service.fetch.com' + data.next : null);
+                setPrevUrl(data.prev ? 'https://frontend-take-home-service.fetch.com' + data.prev : null);
+
             } else {
                 console.log('Could not retrieve dogs');
             }
@@ -82,6 +94,18 @@ export default function Search() {
         const filtered = dogs.filter(dog => dog.breed === selectedBreed || selectedBreed === "");
         setFilteredDogs(filtered);
     };
+
+    // Pagination controls
+    const goToNextPage = () => {
+        // const cursor = nextUrl.split('&from=')[1];
+        // setCurrentCursor(url);
+        fetchDogs(nextUrl);
+    };
+    
+    const goToPrevPage = () => {
+        fetchDogs(prevUrl);
+    };
+    
 
     // get all possible breeds
     const getBreeds = async () => {
@@ -249,6 +273,11 @@ export default function Search() {
                      <Dog key={index} dog={dog}/>
                     //  <TDog key={index} dog={dog}/>
                 ))}
+            </div>
+
+            <div id="pagination">
+                <button onClick={goToPrevPage} disabled={!prevUrl}>Previous</button>
+                <button onClick={goToNextPage} disabled={!nextUrl}>Next</button>
             </div>
         </>
     );
