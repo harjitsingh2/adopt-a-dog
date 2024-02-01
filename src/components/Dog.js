@@ -1,6 +1,18 @@
-import React from "react";
+import React, {useEffect} from "react";
 
-const Dog = ({ dog }) => {
+const Dog = ({ dog, addFavorites, favorites }) => {
+
+    const isFavorited = favorites.includes(dog.id);
+
+    const handleFavoriteClick = () => {
+        addFavorites(dog.id);
+    };
+
+    // useEffect(() => {
+    //     console.log("Updated favorites:", favorites);
+    // }, [favorites]);
+    
+    
     return (
         <div className="max-w-sm rounded overflow-hidden shadow-lg m-4 hover:shadow-xl transition-shadow duration-300">
             {/* <img className="w-full" src={dog.img} alt={dog.name} /> */}
@@ -15,6 +27,9 @@ const Dog = ({ dog }) => {
                 <p className="text-gray-700 text-base">
                     Zip Code: {dog.zip_code}
                 </p>
+                <label>
+                    Add to Favorites <input onChange={handleFavoriteClick} checked={isFavorited} type="checkbox"/>
+                </label>
             </div>
         </div>
     );

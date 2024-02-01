@@ -15,6 +15,9 @@ export default function Search() {
     const [nextUrl, setNextUrl] = useState('');
     const [prevUrl, setPrevUrl] = useState('');
 
+    // manage favorites by user
+    const [favorites, setFavorites] = useState([]);
+
 
     // fetch details of each dog
     const fetchADog = async (dogIds) => {
@@ -105,6 +108,20 @@ export default function Search() {
     const goToPrevPage = () => {
         fetchDogs(prevUrl);
     };
+
+    // add dogs to favorites
+    const addFavorites = (dogId) => {
+        setFavorites(prevFavorites => {
+            // Check if the dog is already in favorites
+            if (prevFavorites.includes(dogId)) {
+                // If so, remove it from array
+                return prevFavorites.filter(favId => favId !== dogId);
+            } else {
+                // Otherwise, add it to array
+                return [...prevFavorites, dogId];
+            }
+        })
+    }
     
 
     // get all possible breeds
@@ -270,7 +287,7 @@ export default function Search() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {filteredDogs.map((dog, index) => (
-                     <Dog key={index} dog={dog}/>
+                     <Dog key={index} dog={dog} addFavorites={addFavorites} favorites={favorites}/>
                     //  <TDog key={index} dog={dog}/>
                 ))}
             </div>
