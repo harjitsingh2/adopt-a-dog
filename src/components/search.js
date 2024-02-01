@@ -1,8 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Dog from "./Dog";
+import { MatchContext } from "../context/MatchContext";
 // import TDog from "./TDog";
 
 export default function Search() {
+    
+    const navigate = useNavigate();
+
     // create local state variable for dogs
     const [dogs, setDogs] = useState([]);
 
@@ -17,6 +22,9 @@ export default function Search() {
 
     // manage favorites by user
     const [favorites, setFavorites] = useState([]);
+
+    // use context to set match
+    const { setMatch } = useContext(MatchContext);
 
 
     // fetch details of each dog
@@ -140,9 +148,10 @@ export default function Search() {
 
             if (response.ok) {
                 const data = await response.json();
+                setMatch(data);
                 console.log('Retrieved a successful match');
                 console.log(data);
-                // return data;
+                navigate('/match');
             } else {
                 console.log('Could not find a match');
             }
