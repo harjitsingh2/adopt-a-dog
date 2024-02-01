@@ -122,6 +122,34 @@ export default function Search() {
             }
         })
     }
+
+    // generate a match
+    const match = async () => {
+        if (favorites.length === 0) {
+            console.log('must add favorites to be matched');
+            return;
+        }
+        
+        try {
+            const response = await fetch('https://frontend-take-home-service.fetch.com/dogs/match', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(favorites),
+                credentials: 'include'
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                console.log('Retrieved a successful match');
+                console.log(data);
+                // return data;
+            } else {
+                console.log('Could not find a match');
+            }
+        } catch (error) {
+            console.error('Error finding a match:', error);
+        }
+    }
     
 
     // get all possible breeds
@@ -283,6 +311,10 @@ export default function Search() {
                         <option value={breed}>{breed}</option>
                     ) )}
                 </select>
+            </div>
+
+            <div>
+                Match me with a dog based on my favorites: <button onClick={match} disabled={favorites.length === 0 ? true : false} >Generate a Match</button>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
