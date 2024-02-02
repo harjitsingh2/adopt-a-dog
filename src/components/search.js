@@ -16,6 +16,11 @@ export default function Search() {
     // track state changes from user input of breed
     const [breedFilter, setBreedFilter] = useState();
 
+    // handle sorting
+    const [sortBreed, setSortBreed] = useState('asc');
+    const [sortName, setSortName] = useState('asc');
+
+
     // manage cursor for pagination
     const [nextUrl, setNextUrl] = useState('');
     const [prevUrl, setPrevUrl] = useState('');
@@ -57,7 +62,7 @@ export default function Search() {
     const fetchDogs = async (url, breed = null) => {
         // console.log('Attempting to retrieve dogs');
         
-        let apiUrl = url || `https://frontend-take-home-service.fetch.com/dogs/search?size=10&sort=breed:asc`;
+        let apiUrl = url || `https://frontend-take-home-service.fetch.com/dogs/search?size=10&sort=breed:${sortBreed}`;
 
         // add breed to query parameters
         if (breed) apiUrl += `&breeds=${encodeURIComponent(breed)}`
@@ -77,10 +82,15 @@ export default function Search() {
                 const dogIds = Object.values(data.resultIds).flat();
                 // make API call to fetchADog after we have created an array of ids
                 const dogDetails = await fetchADog(dogIds);
+
+                // sort dogs
+                const sortedDogs = applySorting(dogDetails);
                 // Update the state with the dog details
-                setDogs(dogDetails); 
+                setDogs(sortedDogs); 
+                // setDogs(dogDetails); 
                 // Initially all dogs are displayed
-                setFilteredDogs(dogDetails);
+                setFilteredDogs(sortedDogs);
+                // setFilteredDogs(dogDetails);
 
                 // Update next url
                 setNextUrl(data.next ? 'https://frontend-take-home-service.fetch.com' + data.next : null);
@@ -98,7 +108,15 @@ export default function Search() {
     useEffect(() => {
         fetchDogs();
         // getBreeds();
-    }, []);
+    }, [sortBreed, sortName]);
+
+    useEffect(() => {
+        if (dogs.length > 0) {
+            const sortedDogs = applySorting(dogs);
+            setFilteredDogs(sortedDogs);
+        }
+    }, [sortBreed, sortName, dogs]);
+    
 
     const handleBreedFilterChange = async (event) => {
         const selectedBreed = event.target.value;
@@ -115,6 +133,18 @@ export default function Search() {
             await fetchDogs();
         }
     };
+
+    // handle sorting
+    const applySorting = (dogs) => {
+        return dogs.sort((a, b) => {
+            if (sortBreed === 'asc') {
+                return a.breed.localeCompare(b.breed) || (sortName === 'asc' ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name));
+            } else {
+                return b.breed.localeCompare(a.breed) || (sortName === 'asc' ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name));
+            }
+        });
+    };
+    
 
     // Pagination controls
     const goToNextPage = () => {
@@ -331,6 +361,21 @@ export default function Search() {
                     ) )}
                 </select>
             </div>
+
+            <div>
+                <label htmlFor="sortBreed">Sort by Breed:</label>
+                <select id="sortBreed" value={sortBreed} onChange={e => setSortBreed(e.target.value)}>
+                    <option value="asc">Ascending</option>
+                    <option value="desc">Descending</option>
+                </select>
+
+                <label htmlFor="sortName">Sort by Name:</label>
+                <select id="sortName" value={sortName} onChange={e => setSortName(e.target.value)}>
+                    <option value="asc">Ascending</option>
+                    <option value="desc">Descending</option>
+                </select>
+            </div>
+
 
             <div>
                 Match me with a dog based on my favorites: <button onClick={match} disabled={favorites.length === 0 ? true : false} >Generate a Match</button>
