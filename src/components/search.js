@@ -54,11 +54,14 @@ export default function Search() {
     };
 
     // fetch dog ids
-    const fetchDogs = async (url) => {
+    const fetchDogs = async (url, breed = null) => {
         // console.log('Attempting to retrieve dogs');
+        
+        let apiUrl = url || `https://frontend-take-home-service.fetch.com/dogs/search?size=10&sort=breed:asc`;
 
-        const apiUrl = url || `https://frontend-take-home-service.fetch.com/dogs/search?size=10`;
-
+        // add breed to query parameters
+        if (breed) apiUrl += `&breeds=${encodeURIComponent(breed)}`
+        
         try {
             const response = await fetch(apiUrl, {
                 method: 'GET',
@@ -97,13 +100,20 @@ export default function Search() {
         // getBreeds();
     }, []);
 
-    const handleBreedFilterChange = (event) => {
+    const handleBreedFilterChange = async (event) => {
         const selectedBreed = event.target.value;
         setBreedFilter(selectedBreed);
 
-        // Filter the dogs based on the selected breed
-        const filtered = dogs.filter(dog => dog.breed === selectedBreed || selectedBreed === "");
-        setFilteredDogs(filtered);
+        // Filter the dogs based on the selected breed. no longer need this because now we are making an api fetch for dogs after user changes breed filter
+        // const filtered = dogs.filter(dog => dog.breed === selectedBreed || selectedBreed === "");
+        // setFilteredDogs(filtered);
+
+        // call fetchDogs when breed is changed
+        if (selectedBreed) {
+            await fetchDogs(null, selectedBreed);
+        } else {
+            await fetchDogs();
+        }
     };
 
     // Pagination controls
