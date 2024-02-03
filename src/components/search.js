@@ -350,47 +350,53 @@ export default function Search() {
 
     return (
         <>
-            <h1 className="text-blue-500">Search for your next dog!</h1>
+            <h1 className="text-blue-500 text-3xl font-bold text-center my-6">Search for your next dog!</h1>
 
-            <div>
-                <label htmlFor="breedFilter">Filter by Breed:</label>
-                <select id="breedFilter" value={breedFilter} onChange={handleBreedFilterChange}>
-                    <option value="">All Breeds</option>
-                    {breeds.map((breed) => (
-                        <option value={breed}>{breed}</option>
-                    ) )}
-                </select>
+            <div classname="">
+                <div>
+                    <label htmlFor="breedFilter" className="mr-2 font-medium">Filter by Breed:</label>
+                    <select id="breedFilter" value={breedFilter} onChange={handleBreedFilterChange} className="rounded border border-gray-300 p-2">
+                        <option value="">All Breeds</option>
+                        {breeds.map((breed) => (
+                            <option value={breed}>{breed}</option>
+                        ) )}
+                    </select>
+                </div>
+                <br></br>
+                <div>
+                    <label htmlFor="sortBreed" className="mr-2 font-medium">Sort by Breed:</label>
+                    <select id="sortBreed" value={sortBreed} onChange={e => setSortBreed(e.target.value)} className="rounded border border-gray-300 p-2">
+                        <option value="asc">Ascending</option>
+                        <option value="desc">Descending</option>
+                    </select>
+                <br></br>
+                    <label htmlFor="sortName" className="mr-2 font-medium">Sort by Name:</label>
+                    <select id="sortName" value={sortName} onChange={e => setSortName(e.target.value)} className="rounded border border-gray-300 p-2">
+                        <option value="asc">Ascending</option>
+                        <option value="desc">Descending</option>
+                    </select>
+                </div>
+            </div>
+            
+
+
+            <div className="text-center">
+                Match me with a dog based on my favorites: <button onClick={match} disabled={favorites.length === 0 ? true : false} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:bg-gray-200 disabled:text-gray-500">Generate a Match</button>
             </div>
 
-            <div>
-                <label htmlFor="sortBreed">Sort by Breed:</label>
-                <select id="sortBreed" value={sortBreed} onChange={e => setSortBreed(e.target.value)}>
-                    <option value="asc">Ascending</option>
-                    <option value="desc">Descending</option>
-                </select>
-
-                <label htmlFor="sortName">Sort by Name:</label>
-                <select id="sortName" value={sortName} onChange={e => setSortName(e.target.value)}>
-                    <option value="asc">Ascending</option>
-                    <option value="desc">Descending</option>
-                </select>
+            <div className="flex justify-center gap-2">
+               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {filteredDogs.map((dog, index) => (
+                        <Dog key={index} dog={dog} addFavorites={addFavorites} favorites={favorites}/>
+                        //  <TDog key={index} dog={dog}/>
+                    ))}
+                </div> 
             </div>
+            
 
-
-            <div>
-                Match me with a dog based on my favorites: <button onClick={match} disabled={favorites.length === 0 ? true : false} >Generate a Match</button>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {filteredDogs.map((dog, index) => (
-                     <Dog key={index} dog={dog} addFavorites={addFavorites} favorites={favorites}/>
-                    //  <TDog key={index} dog={dog}/>
-                ))}
-            </div>
-
-            <div id="pagination">
-                <button onClick={goToPrevPage} disabled={!prevUrl}>Previous</button>
-                <button onClick={goToNextPage} disabled={!nextUrl}>Next</button>
+            <div id="pagination" className="flex justify-center items-center gap-4 my-4">
+                <button onClick={goToPrevPage} disabled={!prevUrl} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:bg-gray-200 disabled:text-gray-500">Previous</button>
+                <button onClick={goToNextPage} disabled={!nextUrl} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:bg-gray-200 disabled:text-gray-500">Next</button>
             </div>
         </>
     );

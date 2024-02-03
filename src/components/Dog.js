@@ -14,10 +14,10 @@ const Dog = ({ dog, addFavorites, favorites }) => {
     
     
     return (
-        <div className="max-w-sm rounded overflow-hidden shadow-lg m-4 hover:shadow-xl transition-shadow duration-300">
-            {/* <img className="w-full" src={dog.img} alt={dog.name} /> */}
+        <div className="max-w-sm rounded overflow-hidden shadow-lg m-4 hover:shadow-xl transition-shadow duration-300 bg-white">
+            <img className="w-full object-cover" src={dog.img} alt={dog.name} />
             <div className="px-6 py-4">
-                <div className="font-bold text-xl mb-2">{dog.name}</div>
+                <div className="font-bold text-xl mb-2 text-blue-700">{dog.name}</div>
                 <p className="text-gray-700 text-base">
                     Age: {dog.age}
                 </p>
@@ -27,12 +27,21 @@ const Dog = ({ dog, addFavorites, favorites }) => {
                 <p className="text-gray-700 text-base">
                     Zip Code: {dog.zip_code}
                 </p>
-                <label>
-                    Add to Favorites <input onChange={handleFavoriteClick} checked={isFavorited} type="checkbox"/>
-                </label>
+                <div className="mt-4">
+                    <label className="inline-flex items-center">
+                        <input 
+                            className="form-checkbox h-5 w-5 text-blue-600" 
+                            onChange={handleFavoriteClick} 
+                            checked={isFavorited} 
+                            type="checkbox"
+                        />
+                        <span className="ml-2 text-gray-700">Add to Favorites</span>
+                    </label>
+                </div>
             </div>
         </div>
     );
+    
 };
 
 export default Dog;
