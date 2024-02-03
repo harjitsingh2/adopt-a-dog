@@ -353,9 +353,9 @@ export default function Search() {
         <>
             <h1 className="text-blue-500 text-3xl font-bold text-center my-6">Search for your next dog!</h1>
 
-            <div classname="">
+            <div>
                 <div>
-                    <label htmlFor="breedFilter" className="mr-2 font-medium">Filter by Breed:</label>
+                    <label htmlFor="breedFilter" className="ml-5 mr-2 font-medium">Filter by Breed:</label>
                     <select id="breedFilter" value={breedFilter} onChange={handleBreedFilterChange} className="rounded border border-gray-300 p-2">
                         <option value="">All Breeds</option>
                         {breeds.map((breed) => (
@@ -365,13 +365,13 @@ export default function Search() {
                 </div>
                 <br></br>
                 <div>
-                    <label htmlFor="sortBreed" className="mr-2 font-medium">Sort by Breed:</label>
+                    <label htmlFor="sortBreed" className="ml-5 mr-2 font-medium">Sort by Breed:</label>
                     <select id="sortBreed" value={sortBreed} onChange={e => setSortBreed(e.target.value)} className="rounded border border-gray-300 p-2">
                         <option value="asc">Ascending</option>
                         <option value="desc">Descending</option>
                     </select>
                 <br></br>
-                    <label htmlFor="sortName" className="mr-2 font-medium">Sort by Name:</label>
+                    <label htmlFor="sortName" className="ml-5 mr-2 font-medium">Sort by Name:</label>
                     <select id="sortName" value={sortName} onChange={e => setSortName(e.target.value)} className="rounded border border-gray-300 p-2">
                         <option value="asc">Ascending</option>
                         <option value="desc">Descending</option>
