@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Dog from "./Dog";
-import { MatchContext } from "../context/MatchContext";
-import Logout from "./Logout";
+import Dog from "./Dog.js";
+import { MatchContext } from "../context/MatchContext.js";
+import Logout from "./Logout.js";
 // import TDog from "./TDog";
 
 export default function Search() {

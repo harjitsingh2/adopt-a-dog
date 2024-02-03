@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
 import './App.css';
 // @ts-ignore
-import Login from './components/Login';
+import Login from './components/Login.js';
 // @ts-ignore
-import Search from './components/Search';
-import Match from './components/Match';
-import { MatchContext } from './context/MatchContext';
+import Search from './components/Search.js';
+import Match from './components/Match.js';
+import { MatchContext } from './context/MatchContext.js';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 

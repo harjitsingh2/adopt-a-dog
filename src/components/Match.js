@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
-import { MatchContext } from "../context/MatchContext";
+import { MatchContext } from "../context/MatchContext.js";
 import { useNavigate } from "react-router-dom";
-import Logout from "./Logout";
+import Logout from "./Logout.js";
 
 const Match = () => {
     
