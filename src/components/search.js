@@ -83,7 +83,7 @@ export default function Search() {
                 // make API call to fetchADog after we have created an array of ids
                 const dogDetails = await fetchADog(dogIds);
 
-                // sort dogs
+                // sort dogs based on user preference
                 const sortedDogs = applySorting(dogDetails);
                 // Update the state with the dog details
                 setDogs(sortedDogs); 
