@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { MatchContext } from "../context/MatchContext";
 import { useNavigate } from "react-router-dom";
+import Logout from "./Logout";
 
 const Match = () => {
     
@@ -66,6 +67,8 @@ const Match = () => {
             <button onClick={returnSearch} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-6">
                 Return to Search
             </button>
+            <br></br>
+            <Logout />
         </div>
     );
     

@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Dog from "./Dog";
 import { MatchContext } from "../context/MatchContext";
+import Logout from "./Logout";
 // import TDog from "./TDog";
 
 export default function Search() {
@@ -397,6 +398,10 @@ export default function Search() {
             <div id="pagination" className="flex justify-center items-center gap-4 my-4">
                 <button onClick={goToPrevPage} disabled={!prevUrl} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:bg-gray-200 disabled:text-gray-500">Previous</button>
                 <button onClick={goToNextPage} disabled={!nextUrl} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:bg-gray-200 disabled:text-gray-500">Next</button>
+            </div>
+
+            <div>
+                <Logout />
             </div>
         </>
     );
