@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import './App.css';
-import Login from './components/login.js';
-import Search from './components/search.js';
+import Login from './components/TempLogin.js';
+import Search from './components/TempSearch.js';
 import Match from './components/Match.js';
 import { MatchContext } from './context/MatchContext.js';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
