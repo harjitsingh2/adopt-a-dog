@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/adopt-a-dog/static/css/main.5f606f3a.chunk.css",
+    "main.js": "/adopt-a-dog/static/js/main.3769898c.chunk.js",
+    "main.js.map": "/adopt-a-dog/static/js/main.3769898c.chunk.js.map",
+    "runtime-main.js": "/adopt-a-dog/static/js/runtime-main.14fb9610.js",
+    "runtime-main.js.map": "/adopt-a-dog/static/js/runtime-main.14fb9610.js.map",
+    "static/js/2.4c8f80d9.chunk.js": "/adopt-a-dog/static/js/2.4c8f80d9.chunk.js",
+    "static/js/2.4c8f80d9.chunk.js.map": "/adopt-a-dog/static/js/2.4c8f80d9.chunk.js.map",
+    "static/js/3.f28749a6.chunk.js": "/adopt-a-dog/static/js/3.f28749a6.chunk.js",
+    "static/js/3.f28749a6.chunk.js.map": "/adopt-a-dog/static/js/3.f28749a6.chunk.js.map",
+    "index.html": "/adopt-a-dog/index.html",
+    "precache-manifest.03af6a7a764acf430bf680980dde652b.js": "/adopt-a-dog/precache-manifest.03af6a7a764acf430bf680980dde652b.js",
+    "service-worker.js": "/adopt-a-dog/service-worker.js",
+    "static/css/main.5f606f3a.chunk.css.map": "/adopt-a-dog/static/css/main.5f606f3a.chunk.css.map",
+    "static/js/2.4c8f80d9.chunk.js.LICENSE.txt": "/adopt-a-dog/static/js/2.4c8f80d9.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.14fb9610.js",
+    "static/js/2.4c8f80d9.chunk.js",
+    "static/css/main.5f606f3a.chunk.css",
+    "static/js/main.3769898c.chunk.js"
+  ]
+}
