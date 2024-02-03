@@ -47,23 +47,28 @@ const Match = () => {
     }
     
     return (
-        <div>
-            <h1>Your Matched Dog</h1>
+        <div className="flex flex-col items-center justify-center min-h-screen bg-blue-50 p-6">
             {dog ? (
                 <div>
-                    <p>Name: {dog.name}</p>
-                    <p>Breed: {dog.breed}</p>
-                    <p>Age: {dog.age}</p>
-                    <p>Zip Code: {dog.zip_code}</p>
-                    <img src={dog.img} alt={dog.name}/>
+                    <h1 className="text-3xl font-bold text-blue-700 mb-6">You matched with {dog.name}!</h1>
+                    <div className="max-w-md rounded overflow-hidden shadow-lg bg-white p-6">
+                        <img className="w-full h-48 object-cover object-center mb-4" src={dog.img} alt={dog.name} />
+                        {/* <p className="text-xl font-medium text-800">Name: {dog.name}</p> */}
+                        <p className="text-md text-700">Breed: {dog.breed}</p>
+                        <p className="text-md text-700">Age: {dog.age}</p>
+                        <p className="text-md text-700 mb-4">Zip Code: {dog.zip_code}</p>
+                    </div>
                 </div>
             ) : (
-                <p>Loading your match...</p> // Displayed while waiting for the data
+                <p className="text-lg text-700">Loading your match...</p>
             )}
-
-            <button onClick={returnSearch}>Return to Search</button>
+    
+            <button onClick={returnSearch} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-6">
+                Return to Search
+            </button>
         </div>
     );
+    
   };
   
   export default Match;
