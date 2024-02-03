@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import Dog from "./Dog.js";
 import { MatchContext } from "../context/MatchContext.js";
 import Logout from "./Logout.js";
-// import TDog from "./TDog";
 
 export default function Search() {
     

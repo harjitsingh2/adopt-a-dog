@@ -1,8 +1,6 @@
 import React, {useState} from 'react';
 import './App.css';
-// @ts-ignore
 import Login from './components/Login.js';
-// @ts-ignore
 import Search from './components/Search.js';
 import Match from './components/Match.js';
 import { MatchContext } from './context/MatchContext.js';
