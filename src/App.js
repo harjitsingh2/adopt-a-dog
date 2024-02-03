@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import './App.css';
-import Login from './components/Login.js';
+import Login from './components/login.js';
 import Search from './components/search.js';
 import Match from './components/Match.js';
 import { MatchContext } from './context/MatchContext.js';
