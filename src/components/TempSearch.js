@@ -47,7 +47,7 @@ export default function Search() {
 
             if (response.ok) {
                 const data = await response.json();
-                console.log('Retrieved single dog data successfully');
+                // console.log('Retrieved single dog data successfully');
                 // console.log(data);
                 return data;
             } else {
@@ -62,7 +62,7 @@ export default function Search() {
     const fetchDogs = async (url, breed = null) => {
         // console.log('Attempting to retrieve dogs');
         
-        let apiUrl = url || `https://frontend-take-home-service.fetch.com/dogs/search?size=10&sort=breed:${sortBreed}`;
+        let apiUrl = url || `https://frontend-take-home-service.fetch.com/dogs/search?size=20&sort=breed:${sortBreed}`;
 
         // add breed to query parameters
         if (breed) apiUrl += `&breeds=${encodeURIComponent(breed)}`
@@ -76,8 +76,8 @@ export default function Search() {
 
             if (response.ok) {
                 const data = await response.json();
-                console.log('Retrieved dogs successfully:');
-                console.log(data);
+                // console.log('Retrieved dogs successfully:');
+                // console.log(data);
                 
                 const dogIds = Object.values(data.resultIds).flat();
                 // make API call to fetchADog after we have created an array of ids
@@ -108,14 +108,14 @@ export default function Search() {
     useEffect(() => {
         fetchDogs();
         // getBreeds();
-    }, [sortBreed, sortName]);
+    }, [sortBreed]);
 
     useEffect(() => {
-        if (dogs.length > 0) {
-            const sortedDogs = applySorting(dogs);
+        if (filteredDogs.length > 0) {
+            const sortedDogs = applySorting(filteredDogs);
             setFilteredDogs(sortedDogs);
         }
-    }, [sortBreed, sortName, dogs]);
+    }, [sortBreed, sortName]);
     
 
     const handleBreedFilterChange = async (event) => {
@@ -136,14 +136,22 @@ export default function Search() {
 
     // handle sorting
     const applySorting = (dogs) => {
-        return dogs.sort((a, b) => {
+        let sortedDogs = [...dogs]
+        
+        sortedDogs.sort((a, b) => {
             if (sortBreed === 'asc') {
                 return a.breed.localeCompare(b.breed) || (sortName === 'asc' ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name));
-            } else {
-                return b.breed.localeCompare(a.breed) || (sortName === 'asc' ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name));
             }
+            if (sortBreed === 'desc') return b.breed.localeCompare(a.breed) || (sortName === 'asc' ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name));
+            if (sortName === 'asc') return b.name.localeCompare(a.breed) || (sortName === 'asc' ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name));
+            if (sortName === 'desc') return b.name.localeCompare(a.breed) || (sortName === 'asc' ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name));
+            
         });
+
+        return sortedDogs;
     };
+
+    
     
 
     // Pagination controls
@@ -189,8 +197,8 @@ export default function Search() {
             if (response.ok) {
                 const data = await response.json();
                 setMatch(data);
-                console.log('Retrieved a successful match');
-                console.log(data);
+                // console.log('Retrieved a successful match');
+                // console.log(data);
                 navigate('/match');
             } else {
                 console.log('Could not find a match');
@@ -365,7 +373,7 @@ export default function Search() {
                 <br></br>
                 <div>
                     <label htmlFor="sortBreed" className="ml-5 mr-2 font-medium">Sort by Breed:</label>
-                    <select id="sortBreed" value={sortBreed} onChange={e => setSortBreed(e.target.value)} className="rounded border border-gray-300 p-2">
+                    <select id="sortBreed" value={sortBreed} disabled={breedFilter ? true : false} onChange={e => setSortBreed(e.target.value)} className="rounded border border-gray-300 p-2">
                         <option value="asc">Ascending</option>
                         <option value="desc">Descending</option>
                     </select>

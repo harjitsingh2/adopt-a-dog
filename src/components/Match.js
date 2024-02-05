@@ -23,12 +23,12 @@ const Match = () => {
 
             if (response.ok) {
                 const data = await response.json();
-                console.log('Retrieved single dog data successfully');
-                console.log(data);
-                console.log(data[0]);
+                // console.log('Retrieved single dog data successfully');
+                // console.log(data);
+                // console.log(data[0]);
                 setDog(data[0]);
             } else {
-                console.log('Could not retrieve single dog data');
+                // console.log('Could not retrieve single dog data');
             }
         } catch (error) {
             console.error('Error fetching dog details:', error);
