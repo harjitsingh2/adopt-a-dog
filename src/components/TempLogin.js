@@ -4,12 +4,14 @@ import {useNavigate} from 'react-router-dom'
 export default function Login() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
+    const [loginError, setLoginError] = useState('');
     const navigate = useNavigate();
 
 
     const handleLogin = async (event) => {
         event.preventDefault();
-        console.log('attempting to log in');
+        setLoginError('');
+        // console.log('attempting to log in');
 
         // make a POST request to API endpoint 
         try {
@@ -21,22 +23,27 @@ export default function Login() {
             })    
             if (response.ok) {
                 const data = await response.text();
-                console.log('Login successful', data);
+                // console.log('Login successful', data);
                 navigate('/search') 
             } else {
-                console.log('Login failed')
+                // console.log('Login failed')
+                setLoginError('Login failed. Please check your credentials and enter a valid name and email.')
             }
             
         } catch (error) {
-            console.log(error);
+            // console.log(error);
+            setLoginError('An error occured. Please try again later.');
         }
     }
     
     return (
         <div className="flex items-center justify-center h-screen bg-blue-50">
             <div className="w-full max-w-xs">
-                <h1 className="text-2xl font-bold text-center text-blue-700 mb-8">Adopt-a-Dog</h1>
-                <form onSubmit={handleLogin} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+                <h1 className="text-3xl font-bold text-center text-blue-700 mb-8">Adopt-a-Dog</h1>
+                <div id="instructions">Welcome to Adopt-a-dog! We are here to help you find a shelter dog and bring them to your home. Please log in using a valid email. Then, you can search through our database of dogs and we will generate a match for you.</div>
+                <br></br>
+                {loginError && <div id="error-message" className="text-red-500">{loginError}</div>}
+                <form onSubmit={handleLogin} className="bg-white shadow-md rounded px-8 pt-8 pb-8 mb-4">
                     <div className="mb-4">
                         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
                             Name
@@ -73,7 +80,11 @@ export default function Login() {
                         </button>
                     </div>
                 </form>
+                <div id="disclaimer" className="text-gray-700">
+                This website is optimized for use on a desktop or laptop, not a mobile device.
+                </div>
             </div>
+
         </div>
     )
 }
