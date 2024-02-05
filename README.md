@@ -2,9 +2,16 @@
 
 Thinking about bringing a dog to your home, but don't know where to start? There are tens of thousands of dogs in shelters who would love to come home with you. Get started here!
 
+---
+
+Link to Live Site:
+[https://adopt-a-dog-eta.vercel.app/](https://adopt-a-dog-eta.vercel.app/)
+
+---
+
 ## Using the dog adoption site
 
-1. Log into the website using your name and email.
+1. Log into the website from your laptop or desktop using your name and email.
 
 <!-- ![](public/adopt-a-dog-login.png) -->
 <img src="public/adopt-a-dog-login.png" width='300'/>
