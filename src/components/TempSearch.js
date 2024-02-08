@@ -159,10 +159,12 @@ export default function Search() {
         // const cursor = nextUrl.split('&from=')[1];
         // setCurrentCursor(url);
         fetchDogs(nextUrl);
+        window.scrollTo({top: 0, behavior: 'smooth'});
     };
     
     const goToPrevPage = () => {
         fetchDogs(prevUrl);
+        window.scrollTo({top: 0, behavior: 'smooth'});
     };
 
     // add dogs to favorites
@@ -390,6 +392,11 @@ export default function Search() {
 
             <div className="text-center">
                 Match me with a dog based on my favorites: <button onClick={match} disabled={favorites.length === 0 ? true : false} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:bg-gray-200 disabled:text-gray-500">Generate a Match</button>
+            </div>
+
+            <div id="pagination" className="flex justify-center items-center gap-4 my-4">
+                <button onClick={goToPrevPage} disabled={!prevUrl} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:bg-gray-200 disabled:text-gray-500">Previous</button>
+                <button onClick={goToNextPage} disabled={!nextUrl} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:bg-gray-200 disabled:text-gray-500">Next</button>
             </div>
 
             <div className="flex justify-center gap-2">
